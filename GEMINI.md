@@ -18,3 +18,7 @@
 ## 3. Rigor Estadístico (Sección 8)
 - **Mediana y tamaño de muestra ($n$):** Reportar siempre la **mediana** (nunca solo el promedio) acompañada explícitamente del número de avisos ($n$).
 - **Incertidumbre en muestras pequeñas (Pamplona):** Incluir intervalos de confianza al 95% por **bootstrap** para la mediana del precio por $\text{m}^2$ y mostrar advertencias explícitas cuando $n < 15$.
+
+## 4. Continuidad entre Chats (Un Chat por Semana)
+- **Lectura obligatoria al iniciar:** Al comenzar cualquier nueva conversación en este proyecto, lee primero `docs/progreso.md` y `docs/legal.md` para conocer exactamente qué semanas e hitos ya están completados y cuál es la tarea activa.
+- **Actualización al cerrar cada semana:** Al terminar las tareas de una semana, actualiza `docs/progreso.md` marcando los entregables completados antes de hacer el commit final de esa semana.
