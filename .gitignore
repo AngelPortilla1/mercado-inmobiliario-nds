@@ -1,0 +1,32 @@
+# Datos crudos (REGLA CRÍTICA: Nunca subir a GitHub)
+data/raw/*
+!data/raw/.gitkeep
+
+# Documentos guía locales (no incluir el PDF del plan)
+*.pdf
+
+# Datos intermedios y bases de datos locales
+data/interim/*
+!data/interim/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+
+# Entornos virtuales y caché de Python
+.venv/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Logs y archivos temporales
+logs/
+*.log
+.DS_Store
+Thumbs.db
+.env
