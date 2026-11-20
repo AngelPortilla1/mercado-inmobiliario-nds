@@ -2,8 +2,12 @@
 data/raw/*
 !data/raw/.gitkeep
 
-# Documentos guía locales (no incluir el PDF del plan)
+# Documentos guía locales y archivos de orquestación IA (solo en local)
 *.pdf
+GEMINI.md
+AGENTS.md
+.agents/
+docs/progreso.md
 
 # Datos intermedios y bases de datos locales
 data/interim/*
