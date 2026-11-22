@@ -1,0 +1,166 @@
+{
+  "fecha_ejecucion": "2026-11-21",
+  "archivo_log": "reports\\scraper_2026-11-21.log",
+  "archivos_crudos_guardados": 80,
+  "total_paginas_descargadas": 80,
+  "total_avisos_detectados": 695,
+  "total_errores_controlados": 0,
+  "fuentes": [
+    {
+      "fuente": "fincaraiz",
+      "fecha_captura": "2026-11-21",
+      "paginas_descargadas": 20,
+      "avisos_detectados": 380,
+      "archivos_crudos": [
+        "data\\raw\\fincaraiz\\2026-11-21\\pamplona_venta_p01.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\pamplona_arriendo_p01.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\cucuta_venta_p01.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\cucuta_venta_p02.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\cucuta_venta_p03.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\cucuta_arriendo_p01.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\cucuta_arriendo_p02.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\cucuta_arriendo_p03.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\los-patios_venta_p01.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\los-patios_venta_p02.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\los-patios_venta_p03.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\los-patios_arriendo_p01.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\los-patios_arriendo_p02.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\los-patios_arriendo_p03.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\villa-del-rosario_venta_p01.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\villa-del-rosario_venta_p02.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\villa-del-rosario_venta_p03.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\villa-del-rosario_arriendo_p01.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\villa-del-rosario_arriendo_p02.json",
+        "data\\raw\\fincaraiz\\2026-11-21\\villa-del-rosario_arriendo_p03.json"
+      ],
+      "desglose": {
+        "pamplona_venta": 2,
+        "pamplona_arriendo": 0,
+        "cucuta_venta": 63,
+        "cucuta_arriendo": 63,
+        "los-patios_venta": 63,
+        "los-patios_arriendo": 63,
+        "villa-del-rosario_venta": 63,
+        "villa-del-rosario_arriendo": 63
+      },
+      "errores": []
+    },
+    {
+      "fuente": "rentabien",
+      "fecha_captura": "2026-11-21",
+      "paginas_descargadas": 20,
+      "avisos_detectados": 220,
+      "archivos_crudos": [
+        "data\\raw\\rentabien\\2026-11-21\\pamplona_venta_p01.json",
+        "data\\raw\\rentabien\\2026-11-21\\pamplona_arriendo_p01.json",
+        "data\\raw\\rentabien\\2026-11-21\\cucuta_venta_p01.json",
+        "data\\raw\\rentabien\\2026-11-21\\cucuta_venta_p02.json",
+        "data\\raw\\rentabien\\2026-11-21\\cucuta_venta_p03.json",
+        "data\\raw\\rentabien\\2026-11-21\\cucuta_arriendo_p01.json",
+        "data\\raw\\rentabien\\2026-11-21\\cucuta_arriendo_p02.json",
+        "data\\raw\\rentabien\\2026-11-21\\cucuta_arriendo_p03.json",
+        "data\\raw\\rentabien\\2026-11-21\\los-patios_arriendo_p01.json",
+        "data\\raw\\rentabien\\2026-11-21\\los-patios_arriendo_p02.json",
+        "data\\raw\\rentabien\\2026-11-21\\los-patios_arriendo_p03.json",
+        "data\\raw\\rentabien\\2026-11-21\\villa-del-rosario_venta_p01.json",
+        "data\\raw\\rentabien\\2026-11-21\\villa-del-rosario_venta_p02.json",
+        "data\\raw\\rentabien\\2026-11-21\\villa-del-rosario_venta_p03.json",
+        "data\\raw\\rentabien\\2026-11-21\\villa-del-rosario_arriendo_p01.json",
+        "data\\raw\\rentabien\\2026-11-21\\villa-del-rosario_arriendo_p02.json",
+        "data\\raw\\rentabien\\2026-11-21\\villa-del-rosario_arriendo_p03.json",
+        "data\\raw\\rentabien\\2026-11-21\\los-patios_venta_p01.json",
+        "data\\raw\\rentabien\\2026-11-21\\los-patios_venta_p02.json",
+        "data\\raw\\rentabien\\2026-11-21\\los-patios_venta_p03.json"
+      ],
+      "desglose": {
+        "pamplona_venta": 8,
+        "pamplona_arriendo": 1,
+        "cucuta_venta": 36,
+        "cucuta_arriendo": 36,
+        "los-patios_venta": 36,
+        "los-patios_arriendo": 36,
+        "villa-del-rosario_venta": 36,
+        "villa-del-rosario_arriendo": 31
+      },
+      "errores": []
+    },
+    {
+      "fuente": "casaclick",
+      "fecha_captura": "2026-11-21",
+      "paginas_descargadas": 1,
+      "avisos_detectados": 13,
+      "archivos_crudos": [
+        "data\\raw\\casaclick\\2026-11-21\\pamplona_p01.html"
+      ],
+      "desglose": {
+        "pamplona_todas": 13
+      },
+      "errores": []
+    },
+    {
+      "fuente": "inmobiliariapamplona",
+      "fecha_captura": "2026-11-21",
+      "paginas_descargadas": 29,
+      "avisos_detectados": 26,
+      "archivos_crudos": [
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\pamplona_index_p01.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\pamplona_index_p02.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\pamplona_index_p03.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_01_arriendo-local-comercial-pasaje-santa-ines.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_02_vendo-apartamento-en-proyecto-de-construccion-de-3-habitacio.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_03_arriendo-apartamento-101-2-habitaciones-edificio-abeto-porta.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_04_arriendo-apartamento-3-amoblado-habitaciones-conjunto-san-ra.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_05_arriendo-apartamento-3-habitaciones-edificio-san-martin-diag.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_06_arriendo-apartamento-3-habitaciones-los-bloques-de-san-pedro.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_07_arriendo-apartamento-3-habitaciones-conjunto-san-rafael.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_08_arriendo-apartamento-2-habitaciones-edificio-plaza-los-andes.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_09_arriendo-apartamento-2-habitaciones-en-chapinero.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_10_arriendo-apartamento-3-habitaciones-urb.-san-martín.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_11_arriendo-apartamento-3-habitaciones-edificio-lufan-clon.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_12_arriendo-local-comercial-centro.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_13_arriendo-casa-urb.-augusto-ramírez.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_14_arriendo-apartamento-3-habitaciones-edificio-lufan.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_15_arriendo-apartamento-3-habitaciones-barrio-el-carmen.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_16_arriendo-consultorio-clínica-pamplona-primer-piso.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_17_arriendo-apartamento-2-habitaciones-paseo-del-río-torre-a-ce.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_18_arriendo-local-comercial-35m-centro-al-lado-del-d1-con-mezan.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_19_arriendo-apartamento-3-habitaciones-el-humilladero-edificio-.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_20_arriendo-locales-comerciales-centro-comercial-el-recreo-fren.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_21_arriendo-apartamento-3-habitaciones-las-colinas-edificio-san.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_22_arriendo-apartamento-para-estrenar-calle-12-14a-72-edificio-.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_23_arriendo-casa-2-plantas-condominio-almeyda-5-habitaciones-co.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_24_arriendo-locales-comerciales-calle-4-santo-domingo-zona-come.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_25_casa-urbanizacion-romaritos.html",
+        "data\\raw\\inmobiliariapamplona\\2026-11-21\\detalle_26_arriendo-apartamento-3-habitaciones-villa-emma-para-estrenar.html"
+      ],
+      "desglose": {
+        "pamplona_catalogo": 26
+      },
+      "errores": []
+    },
+    {
+      "fuente": "bermudez",
+      "fecha_captura": "2026-11-21",
+      "paginas_descargadas": 10,
+      "avisos_detectados": 56,
+      "archivos_crudos": [
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_arriendo_p01.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_arriendo_p02.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_arriendo_p03.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_arriendo_p04.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_arriendo_p05.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_venta_p01.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_venta_p02.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_venta_p03.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_venta_p04.html",
+        "data\\raw\\bermudez\\2026-11-21\\pamplona_venta_p05.html"
+      ],
+      "desglose": {
+        "pamplona_arriendo": 29,
+        "pamplona_venta": 27
+      },
+      "errores": []
+    }
+  ],
+  "estado": "OK"
+}
