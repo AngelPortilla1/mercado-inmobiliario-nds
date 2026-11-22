@@ -7,6 +7,9 @@
 ## 1. Resumen Ejecutivo
 Proyecto de ingeniería y análisis de datos end-to-end que recolecta semanalmente avisos públicos de vivienda en Norte de Santander, aplica reglas auditables de limpieza y deduplicación, modela la información en un esquema estrella SQL y expone hallazgos con rigor estadístico (medianas e intervalos de confianza por bootstrap para muestras pequeñas como Pamplona).
 
+### Arquitectura de Datos
+![Arquitectura de Datos: Mercado Inmobiliario en Norte de Santander](docs/arquitectura_ilustrada.jpg)
+
 ---
 
 ## 2. Vista Previa del Dashboard
