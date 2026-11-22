@@ -10,6 +10,8 @@ Proyecto de ingeniería y análisis de datos end-to-end que recolecta semanalmen
 ### Arquitectura de Datos
 ![Arquitectura de Datos: Mercado Inmobiliario en Norte de Santander](docs/arquitectura_ilustrada.jpg)
 
+> Versión vectorial editable en Excalidraw: [`docs/arquitectura.excalidraw`](docs/arquitectura.excalidraw) (abrir en [excalidraw.com](https://excalidraw.com)).
+
 ---
 
 ## 2. Vista Previa del Dashboard
