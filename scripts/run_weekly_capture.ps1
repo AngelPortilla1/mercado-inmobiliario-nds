@@ -1,4 +1,4 @@
-﻿# Script de Ejecución Semanal — Mercado Inmobiliario en Norte de Santander (NSInmobilario)
+# Script de Ejecución Semanal — Mercado Inmobiliario en Norte de Santander (NSInmobilario)
 # Uso manual:
 #   powershell -ExecutionPolicy Bypass -File .\scripts\run_weekly_capture.ps1
 #
