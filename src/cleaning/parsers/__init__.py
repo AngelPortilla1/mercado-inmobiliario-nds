@@ -17,6 +17,8 @@ from typing import Callable, Dict, List, Optional, Sequence
 
 import pandas as pd
 
+from src.cleaning.parsers.fincaraiz import parse_fincaraiz_dir
+from src.cleaning.parsers.rentabien import parse_rentabien_dir
 from src.cleaning.parsers.schema import (
     AUDIT_COLUMNS,
     DERIVED_COLUMNS,
@@ -32,8 +34,11 @@ logger = logging.getLogger(__name__)
 
 SourceParser = Callable[[Path, str], List[RawListing]]
 
-# Mapa fuente -> función parser. Se poblará en los Pasos 2 y 3.
-PARSER_REGISTRY: Dict[str, SourceParser] = {}
+# Mapa fuente -> función parser. En el Paso 3 se conectarán las 3 fuentes HTML de Pamplona.
+PARSER_REGISTRY: Dict[str, SourceParser] = {
+    "fincaraiz": parse_fincaraiz_dir,
+    "rentabien": parse_rentabien_dir,
+}
 
 
 def register_parser(source_name: str, parser_fn: SourceParser) -> None:
