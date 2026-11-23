@@ -15,17 +15,17 @@
 
 ## 2. Reglas de Limpieza Estandarizadas (Sección 7)
 
-Cada transformación en `src/cleaning/cleaner.py` sigue estas 9 reglas auditables:
+Cada transformación en `src/cleaning/cleaner.py` sigue estas **11 reglas auditables** (las 9 reglas base del diseño inicial más 2 reglas de alcance incorporadas tras la auditoría real de la primera captura — ver detalle en formato STAR en [`docs/decisiones_star.md`](decisiones_star.md)):
 
 1. **Precios y Administración:**
-   - Convertir cadenas como `"$ 1.300.000"` a numérico (`1300000`).
+   - Convertir cadenas como `"$ 1.300.000"` (o valores numéricos provenientes de JSON) a numérico (`1300000`).
    - Separar explícitamente la cuota de administración cuando venga concatenada (ej. `"+ $ 30.000 admin"`).
 2. **Área ($m^2$):**
    - Extraer el valor numérico de expresiones como `"116 m²"`.
    - **Filtro de plausibilidad física:** Descartar áreas menores a $10\text{ m}^2$ o mayores a $5.000\text{ m}^2$ para vivienda urbana (se registran en el reporte de calidad como descartados por área fuera de rango).
 3. **Valores Atípicos (Outliers):**
    - **Marcar (`is_outlier_iqr`), no borrar a ciegas.**
-   - Calcular el rango intercuartílico ($\text{IQR} = Q_3 - Q_1$) agrupando por `(municipio, operacion)`.
+   - Calcular el rango intercuartílico ($\text{IQR} = Q_3 - Q_1$) agrupando por `(municipio, operacion)` **después** de aplicar el filtro residencial y de oferta activa.
    - Marcar registros fuera de $[Q_1 - 1.5 \times \text{IQR},\; Q_3 + 1.5 \times \text{IQR}]$ para revisión manual de errores de digitación (como un cero de más).
 4. **Ubicación Geográfica:**
    - Normalizar `municipio` y `barrio` a minúsculas, sin tildes y con espacios limpios.
@@ -42,6 +42,12 @@ Cada transformación en `src/cleaning/cleaner.py` sigue estas 9 reglas auditable
    - Se calcula como `precio / area_m2` **únicamente** cuando ambos campos son no nulos y válidos.
 9. **Separación Estricta de Operaciones:**
    - Ninguna métrica, gráfico ni consulta puede mezclar `venta` con `arriendo`.
+10. **Alcance Residencial (Solo Vivienda):**
+    - Normalizar `tipo_inmueble` a una taxonomía canónica y conservar únicamente inmuebles residenciales (`apartamento`, `casa`, `apartaestudio`, `duplex`, `casa_campestre`, `casa_lote`, `cabana`).
+    - Excluir inmuebles no residenciales (`local`, `lote`, `bodega`, `oficina`, `consultorio`, `edificio`, `finca`, `parqueadero`, `hotel`, `otro`) **antes** del cálculo de `is_outlier_iqr` y contabilizarlos con desglose en el reporte de calidad (`descartados_no_vivienda`).
+11. **Oferta Activa y Precio Publicado:**
+    - Excluir avisos marcados explícitamente como inactivos (`Vendido`, `Arrendado`, `sold=True`, `deleted=True`) para evitar sesgo por precios históricos desactualizados, inflación de stock y distorsión del proxy de liquidez (`dias_visible`).
+    - Excluir registros sin precio válido (`precio IS NULL` o `precio <= 0`, ej. `"Consultar valor"`), documentando ambos conteos en el reporte de calidad (`descartados_inactivos` y `descartados_sin_precio`).
 
 ---
 
