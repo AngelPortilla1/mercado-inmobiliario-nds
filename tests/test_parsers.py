@@ -21,7 +21,10 @@ from src.cleaning.parsers import (
     parse_source_raw,
     validate_raw_dataframe,
 )
+from src.cleaning.parsers.bermudez import parse_bermudez_html
+from src.cleaning.parsers.casaclick import parse_casaclick_html
 from src.cleaning.parsers.fincaraiz import parse_fincaraiz_item
+from src.cleaning.parsers.inmobiliariapamplona import parse_inmopamplona_detail_html
 from src.cleaning.parsers.rentabien import parse_rentabien_item
 
 
@@ -270,4 +273,179 @@ def test_parse_rentabien_item_handles_mixed_biz_and_reference_arrendado():
     assert parsed_sale.area_m2 == 180.0
     assert parsed_sale.antiguedad is None
     assert parsed_sale.estado_aviso == "activo"
+
+
+def test_parse_bermudez_html_extracts_admin_area_and_recovers_empty_tipo():
+    sample_html = """
+    <div class="view-id-arrienda">
+      <div class="item span9">
+        <div class="card">
+          <h2 class="title"><a href="/property/apartaestudio/san-rafael/hermoso">HERMOSO APTA-ESTUDIO</a></h2>
+          <div class="barrio">CONJUNTO RESIDENCIAL SAN RAFAEL</div>
+          <div class="codigo">Código: 0741</div>
+          <div class="price">$680 000</div>
+          <div class="span5">
+            <div class="content"><span class="label">Tipo:</span> Apartaestudio</div>
+            <div class="content"><span class="label">Estrato:</span> 2</div>
+            <div class="content"><div class="cbody"><p>1 HABITACION. ( SE CANCELA CUOTA DE ADMINISTRACIÓN $80.000).</p></div></div>
+            <div class="content">
+              <span class="area"><span class="label">Area:</span> 35m<sup>2</sup></span>
+              <span class="bathrooms">1</span>
+              <span class="bedrooms">1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item span9">
+        <div class="card">
+          <h2 class="title"><a href="/property/casa/centro/espaciosa-casa">ESPACIOSA CASA EN VENTA</a></h2>
+          <div class="barrio">Centro</div>
+          <div class="codigo">Código: 0999</div>
+          <div class="price">$450 000 000</div>
+          <div class="span5">
+            <div class="content"><span class="label">Tipo:</span></div>
+            <div class="content"><span class="label">Estrato:</span> 4</div>
+            <div class="content">
+              <span class="area"><span class="label">Area:</span> 218m<sup>2</sup></span>
+              <span class="bathrooms">2</span>
+              <span class="bedrooms">7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view-id-apartments"><div class="item span9">Sidebar ignorado</div></div>
+    """
+    records = parse_bermudez_html(sample_html, capture_date="2026-11-21", operacion="arriendo")
+    assert len(records) == 2
+
+    r1 = records[0]
+    assert r1.id_aviso_fuente == "0741"
+    assert r1.url == "https://www.inmobiliariabermudez.com/property/apartaestudio/san-rafael/hermoso"
+    assert r1.precio == 680_000.0
+    assert r1.administracion == 80_000.0
+    assert r1.area_m2 == 35.0
+    assert r1.habitaciones == 1
+    assert r1.banos == 1
+    assert r1.estrato == 2
+    assert r1.estado_aviso == "activo"
+
+    r2 = records[1]
+    assert r2.id_aviso_fuente == "0999"
+    assert r2.tipo_inmueble == "casa"
+    assert r2.area_m2 == 218.0
+    assert r2.habitaciones == 7
+    assert r2.banos == 2
+    assert r2.administracion is None
+
+
+def test_parse_casaclick_html_separates_barrio_el_zulia_and_detects_vendido():
+    sample_html = """
+    <div class="property_listing" data-link="https://www.casaclick.co/propiedades/apto-ana-sofia/">
+      <div class="listing_unit_price_wrapper">$240,000,000</div>
+      <div class="status-wrapper"><div class="ribbon-inside Vendido">Vendido</div></div>
+      <div class="property-unit-information-wrapper">
+        <h4><a href="https://www.casaclick.co/propiedades/apto-ana-sofia/">Venta de Apartamento Ana Sofía</a></h4>
+        <div class="property_address_type1_wrapper">
+          <span class="property_area_type1"><a href="/zona/chapinero/">Chapinero</a></span>,
+          <span class="property_city_type1"><a href="/ciudad/pamplona/">Pamplona</a></span>
+        </div>
+        <div class="property_categories_type1_wrapper">
+          <a href="https://www.casaclick.co/listados/apartamento/">Apartamento</a>
+        </div>
+        <div class="property_details_type1_wrapper">
+          <span class="property_details_type1_baths"><span class="property_details_type1_value">2</span> Baths</span>
+          <span class="property_details_type1_id">ID <span class="property_details_type1_value">31071</span></span>
+          <span class="property_details_type1_size"><span class="property_details_type1_value">Size <span>80 m<sup>2</sup></span></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="property_listing" data-link="https://www.casaclick.co/propiedades/apto-el-zulia/">
+      <div class="listing_unit_price_wrapper">$230,000,000</div>
+      <div class="status-wrapper">
+        <div class="ribbon-inside">Venta</div>
+        <div class="ribbon-inside">En construcción</div>
+      </div>
+      <div class="property-unit-information-wrapper">
+        <h4><a href="https://www.casaclick.co/propiedades/apto-el-zulia/">Edificios SCS en El Zulia</a></h4>
+        <div class="property_address_type1_wrapper">
+          <span class="property_area_type1"><a href="/zona/el-zulia/">El Zulia</a></span>,
+          <span class="property_city_type1"><a href="/ciudad/pamplona/">Pamplona</a></span>
+        </div>
+        <div class="property_categories_type1_wrapper">
+          <a href="https://www.casaclick.co/listados/apartamento/">Apartamento</a> in
+          <a href="https://www.casaclick.co/tipos/venta/">Venta</a>
+        </div>
+        <div class="property_details_type1_wrapper">
+          <span class="property_details_type1_rooms"><span class="property_details_type1_value">3</span> Rooms</span>
+          <span class="property_details_type1_baths"><span class="property_details_type1_value">2</span> Baths</span>
+          <span class="property_details_type1_id">ID <span class="property_details_type1_value">30851</span></span>
+          <span class="property_details_type1_size"><span class="property_details_type1_value">Size <span>95 m<sup>2</sup></span></span></span>
+        </div>
+      </div>
+    </div>
+    """
+    records = parse_casaclick_html(sample_html, capture_date="2026-11-21")
+    assert len(records) == 2
+
+    sold = records[0]
+    assert sold.id_aviso_fuente == "31071"
+    assert sold.operacion == "venta"
+    assert sold.estado_aviso == "inactivo"
+    assert sold.area_m2 == 80.0
+    assert sold.municipio == "Pamplona"
+    assert sold.barrio == "Chapinero"
+
+    active = records[1]
+    assert active.id_aviso_fuente == "30851"
+    assert active.estado_aviso == "activo"
+    assert active.barrio == "El Zulia"
+    assert active.municipio == "Pamplona"
+    assert active.habitaciones == 3
+    assert active.banos == 2
+    assert active.area_m2 == 95.0
+    assert active.antiguedad == "En construcción"
+
+
+def test_parse_inmopamplona_detail_html_isolates_tags_and_handles_contradictory_status():
+    sample_html = """
+    <html>
+      <head>
+        <link rel="canonical" href="https://inmobiliariapamplonasas.com.co/propiedades/arriendo-casa-urb-augusto-ramirez?hsLang=es" />
+      </head>
+      <body>
+        <div class="blog-post__tags">
+          <a href="/propiedades/tag/casa">Casa</a>
+          <a href="/propiedades/tag/disponible">Disponible</a>
+          <a href="/propiedades/tag/arrendado">Arrendado</a>
+        </div>
+        <h1>ARRIENDO CASA Urb. Augusto Ramírez</h1>
+        <article class="blog-post__body">
+          <p>UBICACIÓN: Calle 11E 12-09 Urb. Augusto Ramírez</p>
+          <p>4 habitaciones amplias, 3 baños completos, 110 m², Estrato 3</p>
+          <p>PRECIO: Consultar valor de arriendo</p>
+        </article>
+        <aside class="related-posts">
+          <a href="/propiedades/tag/venta">Venta</a>
+          <a href="/propiedades/tag/local">Local</a>
+        </aside>
+      </body>
+    </html>
+    """
+    parsed = parse_inmopamplona_detail_html(sample_html, capture_date="2026-11-21")
+    assert parsed is not None
+    assert parsed.id_aviso_fuente == "arriendo-casa-urb-augusto-ramirez"
+    assert parsed.url == "https://inmobiliariapamplonasas.com.co/propiedades/arriendo-casa-urb-augusto-ramirez"
+    # Aislado del aside: no toma 'Venta' ni 'Local'
+    assert parsed.operacion == "arriendo"
+    assert parsed.tipo_inmueble == "Casa"
+    # Conservador: 'Arrendado' prevalece sobre 'Disponible'
+    assert parsed.estado_aviso == "inactivo"
+    assert parsed.precio is None
+    assert parsed.area_m2 == 110.0
+    assert parsed.habitaciones == 4
+    assert parsed.banos == 3
+    assert parsed.estrato == 3
+    assert parsed.municipio == "pamplona"
+
 

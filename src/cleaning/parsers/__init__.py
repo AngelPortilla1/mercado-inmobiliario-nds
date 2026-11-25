@@ -17,7 +17,10 @@ from typing import Callable, Dict, List, Optional, Sequence
 
 import pandas as pd
 
+from src.cleaning.parsers.bermudez import parse_bermudez_dir
+from src.cleaning.parsers.casaclick import parse_casaclick_dir
 from src.cleaning.parsers.fincaraiz import parse_fincaraiz_dir
+from src.cleaning.parsers.inmobiliariapamplona import parse_inmopamplona_dir
 from src.cleaning.parsers.rentabien import parse_rentabien_dir
 from src.cleaning.parsers.schema import (
     AUDIT_COLUMNS,
@@ -34,10 +37,13 @@ logger = logging.getLogger(__name__)
 
 SourceParser = Callable[[Path, str], List[RawListing]]
 
-# Mapa fuente -> función parser. En el Paso 3 se conectarán las 3 fuentes HTML de Pamplona.
+# Mapa completo de las 5 fuentes aprobadas en docs/legal.md
 PARSER_REGISTRY: Dict[str, SourceParser] = {
     "fincaraiz": parse_fincaraiz_dir,
     "rentabien": parse_rentabien_dir,
+    "bermudez": parse_bermudez_dir,
+    "casaclick": parse_casaclick_dir,
+    "inmobiliariapamplona": parse_inmopamplona_dir,
 }
 
 
